@@ -1,3 +1,15 @@
+
+# terraform {
+#   backend "remote" {
+#     organization = "terraclouddec11"
+#     workspaces {
+#       name = "test"
+#     }
+#   }
+# }
+
+
+
 provider "random" {
   
 }
