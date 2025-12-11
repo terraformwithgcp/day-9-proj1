@@ -48,6 +48,18 @@ resource "google_compute_instance" "inst1" {
     metadata = {
       ssh-keys = "himanshu:${file("~/.ssh/id_rsa.pub")}"
     }
+    provisioner "file" {
+        source      = "start.sh"
+        destination = "/tmp/start.sh"
+        connection {
+            type        = "ssh" 
+            user        = "himanshu"
+            private_key = file("~/.ssh/id_rsa")
+            host        = self.network_interface[0].access_config[0].nat_ip
+          
+        }
+      
+    }
     provisioner "remote-exec" {
         inline = [ "echo hello > /tmp/hello.txt"]
         connection {
